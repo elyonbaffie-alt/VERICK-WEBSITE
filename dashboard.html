@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard - Verick Bookings</title>
+    <link rel="icon" type="image/x-icon" href="img/favicon-64x64.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-64x64.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-64x64.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon-64x64.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="top-bar">
+                <div class="logo-container">
+                    <a href="index.html" class="logo">
+                        <img src="img/verick-logo.png" alt="Verick Bookings" class="logo-image">
+                    </a>
+                </div>
+                <div class="nav-icons">
+                    <div class="user-dropdown">
+                        <button class="user-dropdown-btn">
+                            <i class="fas fa-user"></i> <span id="user-greeting">My Account</span> <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown-content">
+                            <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                            <a href="profile.html"><i class="fas fa-user-edit"></i> Edit Profile</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                    <a href="#"><i class="fas fa-shopping-cart"></i> My Cart</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard -->
+    <section class="dashboard-section">
+        <div class="container">
+            <!-- Welcome Section -->
+            <div class="welcome-card">
+                <div class="welcome-content">
+                    <h1>Welcome back, <span id="user-name">Traveler</span>! ✈️</h1>
+                    <p>Ready for your next adventure? Let's find you the perfect flight.</p>
+                </div>
+                <div class="welcome-actions">
+                    <a href="index.html" class="primary-btn">
+                        <i class="fas fa-search"></i> Search Flights
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="total-bookings">0</h3>
+                        <p>Total Bookings</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-suitcase"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="upcoming-trips">0</h3>
+                        <p>Upcoming Trips</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="saved-deals">0</h3>
+                        <p>Saved Deals</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Bookings -->
+            <div class="section-card">
+                <div class="section-header">
+                    <h2>Recent Bookings</h2>
+                    <a href="booking-history.html" class="view-all">View All</a>
+                </div>
+                
+                <div class="bookings-list" id="recent-bookings">
+                    <div class="empty-state">
+                        <i class="fas fa-plane-slash"></i>
+                        <h3>No bookings yet</h3>
+                        <p>Your upcoming flights will appear here</p>
+                        <a href="index.html" class="primary-btn">Book Your First Flight</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="section-card">
+                <div class="section-header">
+                    <h2>Quick Actions</h2>
+                </div>
+                <div class="actions-grid">
+                    <a href="index.html" class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3>Search Flights</h3>
+                        <p>Find your next destination</p>
+                    </a>
+                    
+                    <a href="profile.html" class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-user-edit"></i>
+                        </div>
+                        <h3>Update Profile</h3>
+                        <p>Manage your personal info</p>
+                    </a>
+                    
+                    <a href="#" class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Saved Searches</h3>
+                        <p>Your favorite routes</p>
+                    </a>
+                    
+                    <a href="#" class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <h3>Help Center</h3>
+                        <p>Get support 24/7</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

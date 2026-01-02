@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Verick Bookings</title>
+    <link rel="icon" type="image/x-icon" href="img/favicon-64x64.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-64x64.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-64x64.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon-64x64.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+   <style>
+    .services-hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1521791055366-0d553872125f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+        background-size: cover;
+        background-position: center;
+        color: white;
+        padding: 100px 0;
+        text-align: center;
+    }
+    
+    .services-content {
+        padding: 80px 0;
+    }
+    
+    .service-category {
+        margin-bottom: 80px;
+    }
+    
+    .service-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+    }
+    
+    .service-card {
+        background: white;
+        border-radius: 12px;
+        padding: 40px 30px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s;
+    }
+    
+    .service-card:hover {
+        transform: translateY(-10px);
+    }
+    
+    .service-icon {
+        font-size: 50px;
+        color: #ff6b35;
+        margin-bottom: 20px;
+    }
+    
+    .service-features {
+        list-style: none;
+        text-align: left;
+        margin-top: 20px;
+    }
+    
+    .service-features li {
+        margin-bottom: 10px;
+        padding-left: 25px;
+        position: relative;
+    }
+    
+    .service-features li:before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #ff6b35;
+        font-weight: bold;
+    }
+    
+    .cta-section {
+        background: #f8f9fa;
+        padding: 80px 0;
+        text-align: center;
+        border-radius: 12px;
+        margin: 60px 0;
+    }
+
+    /* Replace the hover animation in services.html with this clean version */
+
+.services-hero h1 {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s ease-out 0.3s forwards;
+}
+
+.services-hero p {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s ease-out 0.6s forwards;
+}
+
+/* Simple, clean hover effect for service cards - NO pulsing */
+.service-card {
+    background: white;
+    border-radius: 12px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Stagger the service cards appearance */
+.service-card:nth-child(1) { animation-delay: 0.2s; }
+.service-card:nth-child(2) { animation-delay: 0.4s; }
+.service-card:nth-child(3) { animation-delay: 0.6s; }
+
+/* Remove the pulse animation completely */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="top-bar">
+                <div class="logo-container">
+                    <a href="index.html" class="logo">
+                        <img src="img/verick-logo.png" alt="Verick Bookings" class="logo-image">
+                        <span class="logo-text"></span>
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html" style="color: #ff6b35;">Services</a></li>
+                    <li><a href="business-trip.html">Book Business Trip</a></li>
+</ul>
+                <div class="nav-icons">
+                    <div class="user-dropdown">
+                        <button class="user-dropdown-btn">
+                            <i class="fas fa-user"></i> My Account <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown-content">
+                            <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+                            <a href="register.html"><i class="fas fa-user-plus"></i> Create Account</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="dashboard.html" class="dashboard-link" style="display: none;">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                            <a href="#" class="logout-link" style="display: none;">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </a>
+                        </div>
+                    </div>
+                    <a href="#"><i class="fas fa-shopping-cart"></i> My Cart</a>
+                    <div class="language-selector">EN | FR | ES</div>
+                </div>
+
+                <!-- Mobile Hamburger Button -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation Menu -->
+            <div class="mobile-nav" id="mobileNav">
+                <!-- In ALL HTML files, add this right after the mobile-nav div -->
+                <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+                <div class="mobile-nav-header">
+                    <a href="index.html" class="mobile-logo">
+                        <img src="img/verick-logo.png" alt="Verick Bookings" class="logo-image">
+                    </a>
+                    <button class="mobile-close-btn" id="mobileCloseBtn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <ul class="mobile-nav-links">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="services.html"><i class="fas fa-concierge-bell"></i> Services</a></li>
+                    <li><a href="business-trip.html"><i class="fas fa-briefcase"></i> Business Trip</a></li>
+                    <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                    <li><a href="register.html"><i class="fas fa-user-plus"></i> Create Account</a></li>
+                    <li><a href="#"><i class="fas fa-shopping-cart"></i> My Cart</a></li>
+                </ul>
+                
+                <div class="mobile-language-selector">
+                    <span class="mobile-language-option active">EN</span>
+                    <span class="mobile-language-option">FR</span>
+                    <span class="mobile-language-option">ES</span>
+                </div>
+        </div>
+    </header>
+
+    <section class="services-hero">
+        <div class="container">
+            <h1>Our Services</h1>
+            <p>Comprehensive travel solutions tailored to your needs</p>
+        </div>
+    </section>
+
+    <section class="services-content">
+        <div class="container">
+            <div class="service-category">
+                <h2 class="section-title">Flight Services</h2>
+                <p class="section-subtitle">Domestic and international flights with the best deals</p>
+                
+                <div class="service-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-plane"></i>
+                        </div>
+                        <h3>Domestic Flights</h3>
+                        <p>Affordable flights within Ghana and across West Africa</p>
+                        <ul class="service-features">
+                            <li>Multiple airline options</li>
+                            <li>Best price guarantee</li>
+                            <li>Flexible booking options</li>
+                            <li>24/7 customer support</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h3>International Flights</h3>
+                        <p>Global destinations with competitive pricing</p>
+                        <ul class="service-features">
+                            <li>500+ airlines worldwide</li>
+                            <li>Multi-city itineraries</li>
+                            <li>Business & first class</li>
+                            <li>Visa assistance</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3>Business Travel</h3>
+                        <p>Corporate travel solutions for businesses</p>
+                        <ul class="service-features">
+                            <li>Corporate accounts</li>
+                            <li>Expense management</li>
+                            <li>Dedicated support</li>
+                            <li>Group discounts</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-category">
+                <h2 class="section-title">Additional Services</h2>
+                <p class="section-subtitle">Complete travel packages for a seamless experience</p>
+                
+                <div class="service-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-hotel"></i>
+                        </div>
+                        <h3>Hotel Bookings</h3>
+                        <p>Wide range of accommodations worldwide</p>
+                        <ul class="service-features">
+                            <li>Luxury to budget options</li>
+                            <li>Free cancellation</li>
+                            <li>Best price guarantee</li>
+                            <li>Verified reviews</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <h3>Car Rentals</h3>
+                        <p>Convenient transportation solutions</p>
+                        <ul class="service-features">
+                            <li>Airport pickup/dropoff</li>
+                            <li>Various vehicle types</li>
+                            <li>Insurance included</li>
+                            <li>24/7 roadside assistance</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Travel Insurance</h3>
+                        <p>Comprehensive coverage for peace of mind</p>
+                        <ul class="service-features">
+                            <li>Medical coverage</li>
+                            <li>Trip cancellation</li>
+                            <li>Lost baggage</li>
+                            <li>24/7 emergency support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <h2 class="section-title">Ready to Travel?</h2>
+                <p class="section-subtitle">Start planning your next adventure with Verick Bookings</p>
+                <a href="index.html" class="search-btn" style="display: inline-block; width: auto; padding: 15px 40px;">Book Now</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Verick Bookings</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html">Flight Booking</a></li>
+                        <li><a href="services.html">Hotel Reservations</a></li>
+                        <li><a href="services.html">Car Rentals</a></li>
+                        <li><a href="services.html">Travel Insurance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Business Travel</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Corporate Accounts</a></li>
+                        <li><a href="#">Group Bookings</a></li>
+                        <li><a href="#">Travel Management</a></li>
+                        <li><a href="#">Dedicated Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Verick Bookings. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    <!-- ALL JavaScript in one place -->
+    <script>
+        // ==================== MOBILE NAVIGATION ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded - initializing mobile navigation');
+            
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileCloseBtn = document.getElementById('mobileCloseBtn');
+            const mobileNav = document.getElementById('mobileNav');
+            
+            console.log('Mobile nav elements:', {
+                menuBtn: mobileMenuBtn ? 'Found' : 'NOT FOUND',
+                closeBtn: mobileCloseBtn ? 'Found' : 'NOT FOUND',
+                nav: mobileNav ? 'Found' : 'NOT FOUND'
+            });
+            
+            if (mobileMenuBtn && mobileNav) {
+                // Open mobile menu
+                mobileMenuBtn.addEventListener('click', function() {
+                    console.log('Hamburger clicked - opening menu');
+                    mobileNav.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+                
+                // Close mobile menu
+                if (mobileCloseBtn) {
+                    mobileCloseBtn.addEventListener('click', function() {
+                        console.log('Close button clicked - closing menu');
+                        mobileNav.classList.remove('active');
+                        document.body.style.overflow = '';
+                    });
+                }
+                
+                // Close when clicking links
+                const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileNav.classList.remove('active');
+                        document.body.style.overflow = '';
+                    });
+                });
+                
+                // Close with Escape key
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+                        mobileNav.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+                
+                // Close when clicking outside (on overlay)
+                mobileNav.addEventListener('click', function(e) {
+                    if (e.target === mobileNav) {
+                        mobileNav.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+                
+                console.log('Mobile navigation initialized successfully');
+            } else {
+                console.error('Mobile navigation elements missing!');
+            }
+            
+            // ==================== TRIP TYPE FUNCTIONALITY ====================
+            const tripOptions = document.querySelectorAll('.trip-option');
+            const returnGroup = document.getElementById('return-group');
+            
+            function handleTripTypeChange(tripType) {
+                if (tripType === 'one-way') {
+                    returnGroup.style.display = 'none';
+                } else {
+                    returnGroup.style.display = 'block';
+                }
+            }
+            
+            const activeTripType = document.querySelector('.trip-option.active').getAttribute('data-type');
+            handleTripTypeChange(activeTripType);
+            
+            tripOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    tripOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    const tripType = this.getAttribute('data-type');
+                    handleTripTypeChange(tripType);
+                });
+            });
+            
+            // ==================== PASSENGER SELECTOR ====================
+            const passengerSelector = document.querySelector('.passenger-selector');
+            const passengerTrigger = document.getElementById('passengerTrigger');
+            const passengerDropdown = document.getElementById('passengerDropdown');
+            const passengerText = document.querySelector('.passenger-text');
+            const passengerInput = document.getElementById('passengers');
+            
+            if (passengerTrigger) {
+                // Toggle dropdown
+                passengerTrigger.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    passengerSelector.classList.toggle('active');
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!passengerSelector.contains(e.target)) {
+                        passengerSelector.classList.remove('active');
+                    }
+                });
+                
+                // Counter functionality
+                document.querySelectorAll('.counter-btn').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const type = button.dataset.type;
+                        const action = button.dataset.action;
+                        const countElement = document.querySelector(`.count[data-type="${type}"]`);
+                        let count = parseInt(countElement.textContent);
+                        
+                        if (action === 'increase') {
+                            count++;
+                        } else if (action === 'decrease' && count > 0) {
+                            count--;
+                        }
+                        
+                        countElement.textContent = count;
+                        updatePassengerDisplay();
+                    });
+                });
+                
+                // Close dropdown when Done is clicked
+                const doneBtn = document.querySelector('.done-btn');
+                if (doneBtn) {
+                    doneBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        passengerSelector.classList.remove('active');
+                    });
+                }
+                
+                function updatePassengerDisplay() {
+                    const adults = parseInt(document.querySelector('.count[data-type="adult"]').textContent);
+                    const children = parseInt(document.querySelector('.count[data-type="child"]').textContent);
+                    const total = adults + children;
+                    
+                    // Update display text
+                    passengerText.textContent = `${total} Passenger${total !== 1 ? 's' : ''}`;
+                    
+                    // Update hidden input value for form submission
+                    passengerInput.value = total;
+                }
+            }
+            
+            // ==================== FLIGHT SEARCH FORM ====================
+            const flightSearchForm = document.getElementById('flight-search-form');
+            if (flightSearchForm) {
+                flightSearchForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const from = document.getElementById('from').value;
+                    const to = document.getElementById('to').value;
+                    const departure = document.getElementById('departure').value;
+                    const passengers = document.getElementById('passengers').value;
+                    const flightClass = document.getElementById('class').value;
+                    const tripType = document.querySelector('.trip-option.active').getAttribute('data-type');
+                    
+                    if (!from || !to || !departure || !passengers) {
+                        alert('Please fill in all required fields.');
+                        return;
+                    }
+                    
+                    const params = new URLSearchParams({
+                        from: from,
+                        to: to,
+                        departure: departure,
+                        passengers: passengers,
+                        class: flightClass,
+                        tripType: tripType
+                    });
+                    
+                    window.location.href = `results.html?${params.toString()}`;
+                });
+            }
+            
+            // ==================== EXPLORE BUTTONS ====================
+            document.querySelectorAll('.explore-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const card = this.closest('.destination-card');
+                    const destination = card.querySelector('h3').textContent;
+                    const country = card.querySelector('.destination-country').textContent;
+                    
+                    // Set the destination in the "To" field
+                    const toInput = document.getElementById('to');
+                    if (toInput) {
+                        toInput.value = `${destination}, ${country}`;
+                        
+                        // Smooth scroll to search form
+                        const searchForm = document.querySelector('.search-container');
+                        if (searchForm) {
+                            searchForm.scrollIntoView({ 
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                            
+                            // Add a slight highlight effect to the "To" field
+                            setTimeout(() => {
+                                toInput.focus();
+                                toInput.style.backgroundColor = '#fff9e6';
+                                toInput.style.borderColor = '#ff6b35';
+                                toInput.style.transition = 'all 0.3s ease';
+                                
+                                // Remove highlight after 2 seconds
+                                setTimeout(() => {
+                                    toInput.style.backgroundColor = '';
+                                    toInput.style.borderColor = '';
+                                }, 2000);
+                            }, 500);
+                        }
+                    }
+                });
+            });
+            
+            // ==================== NEWSLETTER ====================
+            const newsletterForm = document.querySelector('.newsletter-form');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const email = this.querySelector('.newsletter-input').value;
+                    if (email) {
+                        alert(`Thank you for subscribing with ${email}! You'll receive our latest deals soon.`);
+                        this.querySelector('.newsletter-input').value = '';
+                    } else {
+                        alert('Please enter your email address.');
+                    }
+                });
+            }
+            
+            console.log('All functionality initialized successfully');
+        });
+    </script>
+    <script src="js/main.js"></script>
+</body>
+</html>

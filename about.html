@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Verick Bookings</title>
+    <link rel="icon" type="image/x-icon" href="img/favicon-64x64.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-64x64.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-64x64.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon-64x64.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+   <style>
+    .about-hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 100px 0;
+    text-align: center;
+    margin-bottom: 60px;
+}
+    
+    .about-hero h1 {
+        font-size: 42px;
+        margin-bottom: 20px;
+        font-weight: 700;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 1s ease-out 0.5s forwards;
+    }
+    
+    .about-hero p {
+        font-size: 20px;
+        margin-bottom: 40px;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 1s ease-out 0.8s forwards;
+    }
+    
+    /* Animation keyframes */
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    
+    .about-content {
+        padding: 80px 0;
+    }
+    
+    .about-section {
+        margin-bottom: 60px;
+    }
+    
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+    }
+    
+    .team-card {
+        background: white;
+        border-radius: 12px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 1s ease-out forwards;
+    }
+    
+    /* Stagger animation for team cards */
+    .team-card:nth-child(1) { animation-delay: 0.3s; }
+    .team-card:nth-child(2) { animation-delay: 0.5s; }
+    .team-card:nth-child(3) { animation-delay: 0.7s; }
+    .team-card:nth-child(4) { animation-delay: 0.9s; }
+    
+    .team-image {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto 20px;
+        background: #f0f0f0;
+    }
+    
+    .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        margin: 60px 0;
+    }
+    
+    .stat-card {
+        text-align: center;
+        padding: 30px;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 1s ease-out forwards;
+    }
+    
+    /* Stagger animation for stat cards */
+    .stat-card:nth-child(1) { animation-delay: 0.2s; }
+    .stat-card:nth-child(2) { animation-delay: 0.4s; }
+    .stat-card:nth-child(3) { animation-delay: 0.6s; }
+    .stat-card:nth-child(4) { animation-delay: 0.8s; }
+    
+    .stat-number {
+        font-size: 48px;
+        font-weight: 700;
+        color: #ff6b35;
+        margin-bottom: 10px;
+    }
+    
+    /* Animate the section titles */
+    .section-title {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 1s ease-out 0.3s forwards;
+    }
+    
+    /* Animate feature cards */
+    .feature-card {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 1s ease-out forwards;
+    }
+    
+    .feature-card:nth-child(1) { animation-delay: 0.3s; }
+    .feature-card:nth-child(2) { animation-delay: 0.5s; }
+    .feature-card:nth-child(3) { animation-delay: 0.7s; }
+</style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="top-bar">
+                <div class="logo-container">
+                    <a href="index.html" class="logo">
+                        <img src="img/verick-logo.png" alt="Verick Bookings" class="logo-image">
+                        <span class="logo-text"></span>
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html" style="color: #ff6b35;">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="business-trip.html">Book Business Trip</a></li>
+                </ul>
+                <div class="nav-icons">
+                    <div class="user-dropdown">
+                        <button class="user-dropdown-btn">
+                            <i class="fas fa-user"></i> My Account <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown-content">
+                            <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+                            <a href="register.html"><i class="fas fa-user-plus"></i> Create Account</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="dashboard.html" class="dashboard-link" style="display: none;">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                            <a href="#" class="logout-link" style="display: none;">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </a>
+                        </div>
+                    </div>
+                    <a href="#"><i class="fas fa-shopping-cart"></i> My Cart</a>
+                    <div class="language-selector">EN | FR | ES</div>
+                </div>
+            </div>
+
+            <!-- ==== ADD THIS HAMBURGER BUTTON ==== -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- ==== ADD THIS MOBILE NAVIGATION MENU ==== -->
+        <div class="mobile-nav" id="mobileNav">
+            <!-- In ALL HTML files, add this right after the mobile-nav div -->
+            <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+            <div class="mobile-nav-header">
+                <a href="index.html" class="mobile-logo">
+                    <img src="img/verick-logo.png" alt="Verick Bookings" class="logo-image">
+                </a>
+                <button class="mobile-close-btn" id="mobileCloseBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <ul class="mobile-nav-links">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="services.html"><i class="fas fa-concierge-bell"></i> Services</a></li>
+                <li><a href="business-trip.html"><i class="fas fa-briefcase"></i> Business Trip</a></li>
+                <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                <li><a href="register.html"><i class="fas fa-user-plus"></i> Create Account</a></li>
+                <li><a href="#"><i class="fas fa-shopping-cart"></i> My Cart</a></li>
+            </ul>
+            
+            <div class="mobile-language-selector">
+                <span class="mobile-language-option active">EN</span>
+                <span class="mobile-language-option">FR</span>
+                <span class="mobile-language-option">ES</span>
+            </div>
+        </div>
+        </div>
+    </header>
+
+    <section class="about-hero">
+        <div class="container">
+            <h1>About Verick Bookings</h1>
+            <p>Your trusted partner for seamless travel experiences across Africa and beyond</p>
+        </div>
+    </section>
+
+    <section class="about-content">
+        <div class="container">
+            <div class="about-section">
+                <h2 class="section-title">Our Story</h2>
+                <p class="section-subtitle">Founded in 2018, Verick Bookings emerged from a simple vision: to make travel across Africa accessible, affordable, and enjoyable for everyone.</p>
+                
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-number">50K+</div>
+                        <h3>Happy Travelers</h3>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">15+</div>
+                        <h3>African Countries</h3>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">98%</div>
+                        <h3>Customer Satisfaction</h3>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">24/7</div>
+                        <h3>Support Available</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-section">
+                <h2 class="section-title">Our Mission</h2>
+                <p>We believe that travel should be a joy, not a chore. That's why we've built a platform that simplifies the entire process - from finding the best deals to providing round-the-clock support during your journey.</p>
+            </div>
+
+            <div class="about-section">
+                <h2 class="section-title">Why Choose Us?</h2>
+                <div class="features">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-globe-africa"></i>
+                        </div>
+                        <h3>Africa Experts</h3>
+                        <p>Deep knowledge of African travel routes and local insights</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <h3>Best Value</h3>
+                        <p>Competitive prices with no hidden fees</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>Local Support</h3>
+                        <p>Dedicated support team based in Ghana</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Verick Bookings</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html">Flight Booking</a></li>
+                        <li><a href="services.html">Hotel Reservations</a></li>
+                        <li><a href="services.html">Car Rentals</a></li>
+                        <li><a href="services.html">Travel Insurance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Business Travel</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Corporate Accounts</a></li>
+                        <li><a href="#">Group Bookings</a></li>
+                        <li><a href="#">Travel Management</a></li>
+                        <li><a href="#">Dedicated Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Verick Bookings. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/mobile-nav.js"></script> <!-- Add this line -->
+</body>
+</html>

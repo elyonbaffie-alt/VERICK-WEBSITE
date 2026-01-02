@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verick Bookings - Find the Cheapest Flight</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-64x64.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-64x64.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon-64x64.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Hero animations */
+        .hero h1 {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+        }
+        
+        .hero p {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out 0.6s forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Ensure search container is above mobile nav */
+        .search-container {
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Mobile nav specific styles */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #5f6368;
+            cursor: pointer;
+            padding: 8px;
+            margin-left: 15px;
+        }
+        
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: white;
+            z-index: 2000;
+            padding: 20px;
+            overflow-y: auto;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-nav.active {
+            transform: translateX(0);
+            display: block;
+        }
+        
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .mobile-close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #5f6368;
+            cursor: pointer;
+            padding: 5px;
+        }
+        
+        .mobile-nav-links {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .mobile-nav-links li {
+            margin-bottom: 15px;
+        }
+        
+        .mobile-nav-links a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            color: #333;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-nav-links a:hover {
+            background: #f8f9fa;
+            color: #ff6b35;
+        }
+        
+        .mobile-nav-links i {
+            width: 20px;
+            text-align: center;
+            color: #ff6b35;
+        }
+        
+        .mobile-language-selector {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .mobile-language-option {
+            padding: 8px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            color: #5f6368;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-language-option.active,
+        .mobile-language-option:hover {
+            border-color: #ff6b35;
+            color: #ff6b35;
+            background: #fff8f5;
+        }
+        
+        @media (max-width: 1024px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .nav-icons {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                margin-left: auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-nav {
+                padding: 15px;
+            }
+            
+            .mobile-nav-links a {
+                font-size: 16px;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Mobile Navigation -->
+    <header>
+        <div class="container">
+            <div class="top-bar">
+                <div class="logo-container">
+                    <a href="index.html" class="logo">
+                        <img src="img/verick-logo.png" alt="Verick Bookings" class="logo-image">
+                    </a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <ul class="nav-links">
+                    <li><a href="index.html" style="color: #ff6b35;">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="business-trip.html">Book Business Trip</a></li>
+                </ul>
+                
+                <div class="nav-icons">
+                    <div class="user-dropdown">
+                        <button class="user-dropdown-btn">
+                            <i class="fas fa-user"></i> My Account <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown-content">
+                            <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+                            <a href="register.html"><i class="fas fa-user-plus"></i> Create Account</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="dashboard.html" class="dashboard-link" style="display: none;">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                            <a href="#" class="logout-link" style="display: none;">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </a>
+                        </div>
+                    </div>
+                    <a href="#"><i class="fas fa-shopping-cart"></i> My Cart</a>
+                    <div class="language-selector">EN | FR | ES</div>
+                </div>
+                
+                <!-- Mobile Hamburger Button -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation Menu -->
+            <div class="mobile-nav" id="mobileNav">
+                <!-- In ALL HTML files, add this right after the mobile-nav div -->
+                <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+                <div class="mobile-nav-header">
+                    <a href="index.html" class="mobile-logo">
+                        <img src="img/verick-logo.png" alt="Verick Bookings" class="logo-image">
+                    </a>
+                    <button class="mobile-close-btn" id="mobileCloseBtn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <ul class="mobile-nav-links">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="services.html"><i class="fas fa-concierge-bell"></i> Services</a></li>
+                    <li><a href="business-trip.html"><i class="fas fa-briefcase"></i> Business Trip</a></li>
+                    <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                    <li><a href="register.html"><i class="fas fa-user-plus"></i> Create Account</a></li>
+                    <li><a href="#"><i class="fas fa-shopping-cart"></i> My Cart</a></li>
+                </ul>
+                
+                <div class="mobile-language-selector">
+                    <span class="mobile-language-option active">EN</span>
+                    <span class="mobile-language-option">FR</span>
+                    <span class="mobile-language-option">ES</span>
+                </div>
+
+                <!-- ==== ADD THIS HAMBURGER BUTTON ==== -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Find the Cheapest Flight</h1>
+            <p>Book flights to destinations worldwide with the best prices and service</p>
+        </div>
+    </section>
+
+    <!-- Search Form -->
+    <section class="container">
+        <div class="search-container">
+            <div class="trip-type">
+                <div class="trip-option active" data-type="one-way">One Way</div>
+                <div class="trip-option" data-type="round-trip">Round Trip</div>
+                <div class="trip-option" data-type="multi-city">Multi City</div>
+            </div>
+            
+            <form class="search-form" id="flight-search-form">
+                <div class="form-group">
+                    <label for="from">From</label>
+                    <input type="text" id="from" class="form-control" placeholder="Select City" autocomplete="off" value="Accra, Ghana (ACC)">
+                    <div id="from-autocomplete" class="autocomplete-items"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="to">To</label>
+                    <input type="text" id="to" class="form-control" placeholder="Select City" autocomplete="off">
+                    <div id="to-autocomplete" class="autocomplete-items"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="departure">Departure</label>
+                    <div class="date-input">
+                        <input type="text" id="departure" class="form-control" placeholder="Select Date" readonly>
+                        <i class="fas fa-calendar-alt" id="departure-calendar-icon"></i>
+                        <div id="departure-calendar" class="calendar-popup"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group" id="return-group">
+                    <label for="return">Return</label>
+                    <div class="date-input">
+                        <input type="text" id="return" class="form-control" placeholder="Select Date" readonly>
+                        <i class="fas fa-calendar-alt" id="return-calendar-icon"></i>
+                        <div id="return-calendar" class="calendar-popup"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="passengers">Passengers</label>
+                    <div class="passenger-selector">
+                        <div class="passenger-trigger" id="passengerTrigger">
+                            <span class="passenger-icon">👤</span>
+                            <span class="passenger-text">1 Passenger</span>
+                            <span class="dropdown-arrow">⌄</span>
+                        </div>
+                        
+                        <div class="passenger-dropdown" id="passengerDropdown">
+                            <div class="passenger-option">
+                                <label>Adults (16+)</label>
+                                <div class="counter">
+                                    <button type="button" class="counter-btn" data-type="adult" data-action="decrease">-</button>
+                                    <span class="count" data-type="adult">1</span>
+                                    <button type="button" class="counter-btn" data-type="adult" data-action="increase">+</button>
+                                </div>
+                            </div>
+                            
+                            <div class="passenger-option">
+                                <label>Children (0-15)</label>
+                                <div class="counter">
+                                    <button type="button" class="counter-btn" data-type="child" data-action="decrease">-</button>
+                                    <span class="count" data-type="child">0</span>
+                                    <button type="button" class="counter-btn" data-type="child" data-action="increase">+</button>
+                                </div>
+                            </div>
+                            
+                            <button type="button" class="done-btn">Done</button>
+                        </div>
+                    </div>
+                    <input type="hidden" id="passengers" name="passengers" value="1">
+                </div>
+                
+                <div class="form-group">
+                    <label for="class">Class</label>
+                    <select id="class" class="form-control">
+                        <option>Economy</option>
+                        <option>Premium Economy</option>
+                        <option>Business</option>
+                        <option>First Class</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <div class="flexible-dates">
+                        <input type="checkbox" id="flexible-dates">
+                        <label for="flexible-dates">My dates are flexible (+/- 3 days)</label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="search-btn">Search Flights</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Popular Destinations -->
+    <section class="popular-destinations">
+        <div class="container">
+            <div class="section-header">
+                <h2>Popular Destinations</h2>
+                <p class="section-subtitle">Explore trending travel destinations with great flight deals</p>
+            </div>
+            
+            <div class="destinations-grid">
+                <!-- Paris -->
+                <div class="destination-card">
+                    <div class="destination-image">
+                        <img src="img/Paris.jpg" alt="Paris, France">
+                    </div>
+                    <div class="destination-content">
+                        <div class="destination-header">
+                            <h3>Paris</h3>
+                            <div class="destination-country">France</div>
+                        </div>
+                        <div class="destination-price">
+                            <span class="price-label">from</span>
+                            <span class="price-amount">GHS 5,400</span>
+                        </div>
+                        <button class="explore-btn">Explore Flights</button>
+                    </div>
+                </div>
+
+                <!-- Dubai -->
+                <div class="destination-card">
+                    <div class="destination-image">
+                        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Dubai, UAE">
+                    </div>
+                    <div class="destination-content">
+                        <div class="destination-header">
+                            <h3>Dubai</h3>
+                            <div class="destination-country">UAE</div>
+                        </div>
+                        <div class="destination-price">
+                            <span class="price-label">from</span>
+                            <span class="price-amount">GHS 7,440</span>
+                        </div>
+                        <button class="explore-btn">Explore Flights</button>
+                    </div>
+                </div>
+
+                <!-- Tokyo -->
+                <div class="destination-card">
+                    <div class="destination-image">
+                        <img src="img/Tokyo.jpg" alt="Tokyo, Japan">
+                    </div>
+                    <div class="destination-content">
+                        <div class="destination-header">
+                            <h3>Tokyo</h3>
+                            <div class="destination-country">Japan</div>
+                        </div>
+                        <div class="destination-price">
+                            <span class="price-label">from</span>
+                            <span class="price-amount">GHS 9,600</span>
+                        </div>
+                        <button class="explore-btn">Explore Flights</button>
+                    </div>
+                </div>
+
+                <!-- New York -->
+                <div class="destination-card">
+                    <div class="destination-image">
+                        <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="New York, USA">
+                    </div>
+                    <div class="destination-content">
+                        <div class="destination-header">
+                            <h3>New York</h3>
+                            <div class="destination-country">USA</div>
+                        </div>
+                        <div class="destination-price">
+                            <span class="price-label">from</span>
+                            <span class="price-amount">GHS 8,200</span>
+                        </div>
+                        <button class="explore-btn">Explore Flights</button>
+                    </div>
+                </div>
+
+                <!-- London -->
+                <div class="destination-card">
+                    <div class="destination-image">
+                        <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="London, UK">
+                    </div>
+                    <div class="destination-content">
+                        <div class="destination-header">
+                            <h3>London</h3>
+                            <div class="destination-country">UK</div>
+                        </div>
+                        <div class="destination-price">
+                            <span class="price-label">from</span>
+                            <span class="price-amount">GHS 6,800</span>
+                        </div>
+                        <button class="explore-btn">Explore Flights</button>
+                    </div>
+                </div>
+
+                <!-- Bangkok -->
+                <div class="destination-card">
+                    <div class="destination-image">
+                        <img src="img/Bangkok.jpg" alt="Bangkok, Thailand">
+                    </div>
+                    <div class="destination-content">
+                        <div class="destination-header">
+                            <h3>Bangkok</h3>
+                            <div class="destination-country">Thailand</div>
+                        </div>
+                        <div class="destination-price">
+                            <span class="price-label">from</span>
+                            <span class="price-amount">GHS 7,100</span>
+                        </div>
+                        <button class="explore-btn">Explore Flights</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Why Book Section -->
+    <section class="why-book">
+        <div class="container">
+            <h2 class="section-title">Why Book With Verick?</h2>
+            <p class="section-description">Experience hassle-free booking with unmatched service and value</p>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tag"></i>
+                    </div>
+                    <h3>Best Prices</h3>
+                    <p>Compare prices from hundreds of airlines to get the best deal every time</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Safe & Secure</h3>
+                    <p>Your data is protected with industry-leading security measures</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Fast Booking</h3>
+                    <p>Book your flight in minutes with our streamlined checkout process</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>24/7 Support</h3>
+                    <p>Our customer service team is always ready to help you</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="container">
+        <div class="newsletter">
+            <h2>✈️ Exclusive Travel Deals</h2>
+            <p>Be the first to know about flash sales, special offers, and travel tips delivered straight to your inbox</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                <button type="submit" class="newsletter-btn">Subscribe Now</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Verick Bookings</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html">Flight Booking</a></li>
+                        <li><a href="services.html">Hotel Reservations</a></li>
+                        <li><a href="services.html">Car Rentals</a></li>
+                        <li><a href="services.html">Travel Insurance</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Business Travel</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Corporate Accounts</a></li>
+                        <li><a href="#">Group Bookings</a></li>
+                        <li><a href="#">Travel Management</a></li>
+                        <li><a href="#">Dedicated Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2025 Verick Bookings. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- ALL JavaScript in one place -->
+    <script>
+        // ==================== MOBILE NAVIGATION ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded - initializing mobile navigation');
+            
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileCloseBtn = document.getElementById('mobileCloseBtn');
+            const mobileNav = document.getElementById('mobileNav');
+            
+            console.log('Mobile nav elements:', {
+                menuBtn: mobileMenuBtn ? 'Found' : 'NOT FOUND',
+                closeBtn: mobileCloseBtn ? 'Found' : 'NOT FOUND',
+                nav: mobileNav ? 'Found' : 'NOT FOUND'
+            });
+            
+            if (mobileMenuBtn && mobileNav) {
+                // Open mobile menu
+                mobileMenuBtn.addEventListener('click', function() {
+                    console.log('Hamburger clicked - opening menu');
+                    mobileNav.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+                
+                // Close mobile menu
+                if (mobileCloseBtn) {
+                    mobileCloseBtn.addEventListener('click', function() {
+                        console.log('Close button clicked - closing menu');
+                        mobileNav.classList.remove('active');
+                        document.body.style.overflow = '';
+                    });
+                }
+                
+                // Close when clicking links
+                const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileNav.classList.remove('active');
+                        document.body.style.overflow = '';
+                    });
+                });
+                
+                // Close with Escape key
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+                        mobileNav.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+                
+                // Close when clicking outside (on overlay)
+                mobileNav.addEventListener('click', function(e) {
+                    if (e.target === mobileNav) {
+                        mobileNav.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+                
+                console.log('Mobile navigation initialized successfully');
+            } else {
+                console.error('Mobile navigation elements missing!');
+            }
+            
+            // ==================== TRIP TYPE FUNCTIONALITY ====================
+            const tripOptions = document.querySelectorAll('.trip-option');
+            const returnGroup = document.getElementById('return-group');
+            
+            function handleTripTypeChange(tripType) {
+                if (tripType === 'one-way') {
+                    returnGroup.style.display = 'none';
+                } else {
+                    returnGroup.style.display = 'block';
+                }
+            }
+            
+            const activeTripType = document.querySelector('.trip-option.active').getAttribute('data-type');
+            handleTripTypeChange(activeTripType);
+            
+            tripOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    tripOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    const tripType = this.getAttribute('data-type');
+                    handleTripTypeChange(tripType);
+                });
+            });
+            
+            // ==================== PASSENGER SELECTOR ====================
+            const passengerSelector = document.querySelector('.passenger-selector');
+            const passengerTrigger = document.getElementById('passengerTrigger');
+            const passengerDropdown = document.getElementById('passengerDropdown');
+            const passengerText = document.querySelector('.passenger-text');
+            const passengerInput = document.getElementById('passengers');
+            
+            if (passengerTrigger) {
+                // Toggle dropdown
+                passengerTrigger.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    passengerSelector.classList.toggle('active');
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!passengerSelector.contains(e.target)) {
+                        passengerSelector.classList.remove('active');
+                    }
+                });
+                
+                // Counter functionality
+                document.querySelectorAll('.counter-btn').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const type = button.dataset.type;
+                        const action = button.dataset.action;
+                        const countElement = document.querySelector(`.count[data-type="${type}"]`);
+                        let count = parseInt(countElement.textContent);
+                        
+                        if (action === 'increase') {
+                            count++;
+                        } else if (action === 'decrease' && count > 0) {
+                            count--;
+                        }
+                        
+                        countElement.textContent = count;
+                        updatePassengerDisplay();
+                    });
+                });
+                
+                // Close dropdown when Done is clicked
+                const doneBtn = document.querySelector('.done-btn');
+                if (doneBtn) {
+                    doneBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        passengerSelector.classList.remove('active');
+                    });
+                }
+                
+                function updatePassengerDisplay() {
+                    const adults = parseInt(document.querySelector('.count[data-type="adult"]').textContent);
+                    const children = parseInt(document.querySelector('.count[data-type="child"]').textContent);
+                    const total = adults + children;
+                    
+                    // Update display text
+                    passengerText.textContent = `${total} Passenger${total !== 1 ? 's' : ''}`;
+                    
+                    // Update hidden input value for form submission
+                    passengerInput.value = total;
+                }
+            }
+            
+            // ==================== FLIGHT SEARCH FORM ====================
+            const flightSearchForm = document.getElementById('flight-search-form');
+            if (flightSearchForm) {
+                flightSearchForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const from = document.getElementById('from').value;
+                    const to = document.getElementById('to').value;
+                    const departure = document.getElementById('departure').value;
+                    const passengers = document.getElementById('passengers').value;
+                    const flightClass = document.getElementById('class').value;
+                    const tripType = document.querySelector('.trip-option.active').getAttribute('data-type');
+                    
+                    if (!from || !to || !departure || !passengers) {
+                        alert('Please fill in all required fields.');
+                        return;
+                    }
+                    
+                    const params = new URLSearchParams({
+                        from: from,
+                        to: to,
+                        departure: departure,
+                        passengers: passengers,
+                        class: flightClass,
+                        tripType: tripType
+                    });
+                    
+                    window.location.href = `results.html?${params.toString()}`;
+                });
+            }
+            
+            // ==================== EXPLORE BUTTONS ====================
+            document.querySelectorAll('.explore-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const card = this.closest('.destination-card');
+                    const destination = card.querySelector('h3').textContent;
+                    const country = card.querySelector('.destination-country').textContent;
+                    
+                    // Set the destination in the "To" field
+                    const toInput = document.getElementById('to');
+                    if (toInput) {
+                        toInput.value = `${destination}, ${country}`;
+                        
+                        // Smooth scroll to search form
+                        const searchForm = document.querySelector('.search-container');
+                        if (searchForm) {
+                            searchForm.scrollIntoView({ 
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                            
+                            // Add a slight highlight effect to the "To" field
+                            setTimeout(() => {
+                                toInput.focus();
+                                toInput.style.backgroundColor = '#fff9e6';
+                                toInput.style.borderColor = '#ff6b35';
+                                toInput.style.transition = 'all 0.3s ease';
+                                
+                                // Remove highlight after 2 seconds
+                                setTimeout(() => {
+                                    toInput.style.backgroundColor = '';
+                                    toInput.style.borderColor = '';
+                                }, 2000);
+                            }, 500);
+                        }
+                    }
+                });
+            });
+            
+            // ==================== NEWSLETTER ====================
+            const newsletterForm = document.querySelector('.newsletter-form');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const email = this.querySelector('.newsletter-input').value;
+                    if (email) {
+                        alert(`Thank you for subscribing with ${email}! You'll receive our latest deals soon.`);
+                        this.querySelector('.newsletter-input').value = '';
+                    } else {
+                        alert('Please enter your email address.');
+                    }
+                });
+            }
+            
+            console.log('All functionality initialized successfully');
+        });
+    </script>
+
+    <script src="js/autocomplete.js"></script>
+    <script src="js/calendar.js"></script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Verick Bookings</title>
+    <link rel="icon" type="image/x-icon" href="img/favicon-64x64.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-64x64.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-64x64.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon-64x64.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+    <!-- Header (same as index.html) -->
+    <header>
+        <div class="container">
+            <div class="top-bar">
+                <div class="logo-container">
+                    <a href="index.html" class="logo">
+                        <img src="img/verick-logo.png" alt="Verick Bookings" class="logo-image">
+                    </a>
+                </div>
+                <div class="nav-icons">
+                    <a href="login.html"><i class="fas fa-user"></i> Already have an account? Login</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Registration Form -->
+    <section class="auth-section">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-header">
+                    <h1>Create Your Account</h1>
+                    <p>Join thousands of travelers booking with Verick</p>
+                </div>
+                
+                <form class="auth-form" id="register-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                            <div class="error-message" id="firstName-error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                            <div class="error-message" id="lastName-error"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                        <div class="error-message" id="email-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                        <div class="error-message" id="phone-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password *</label>
+                        <input type="password" id="password" name="password" required>
+                        <div class="password-strength">
+                            <div class="strength-bar"></div>
+                            <span class="strength-text">Weak</span>
+                        </div>
+                        <div class="error-message" id="password-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password *</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                        <div class="error-message" id="confirmPassword-error"></div>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="newsletter" name="newsletter" checked>
+                        <label for="newsletter">Send me exclusive deals and travel tips</label>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">I agree to the <a href="#" class="link">Terms of Service</a> and <a href="#" class="link">Privacy Policy</a> *</label>
+                        <div class="error-message" id="terms-error"></div>
+                    </div>
+
+                    <button type="submit" class="auth-btn" id="register-btn">
+                        <span class="btn-text">Create Account</span>
+                        <div class="btn-loading" style="display: none;">
+                            <i class="fas fa-spinner fa-spin"></i> Creating Account...
+                        </div>
+                    </button>
+
+                    <div class="auth-divider">
+                        <span>or</span>
+                    </div>
+
+                    <button type="button" class="social-btn google-btn">
+                        <i class="fab fa-google"></i>
+                        Continue with Google
+                    </button>
+
+                    <button type="button" class="social-btn facebook-btn">
+                        <i class="fab fa-facebook-f"></i>
+                        Continue with Facebook
+                    </button>
+                </form>
+
+                <div class="auth-footer">
+                    <p>Already have an account? <a href="login.html" class="link">Sign in here</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>

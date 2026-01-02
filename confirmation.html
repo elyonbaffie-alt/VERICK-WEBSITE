@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmed - Verick Bookings</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-64x64.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-64x64.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon-64x64.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .confirmation-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .confirmation-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .confirmation-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .success-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: #28a745;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 32px;
+        }
+
+        .booking-reference {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .reference-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ff6b35;
+            letter-spacing: 2px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            margin-bottom: 30px;
+        }
+
+        .info-section h3 {
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-section h3 i {
+            color: #ff6b35;
+        }
+
+        .flight-summary {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .flight-route {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .flight-details {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .passenger-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .passenger-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #ff6b35;
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .btn {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: #ff6b35;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: white;
+            color: #ff6b35;
+            border: 2px solid #ff6b35;
+        }
+
+        .btn-outline:hover {
+            background: #fff8f5;
+        }
+
+        .ticket-notice {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .ticket-notice i {
+            color: #0066cc;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .eticket-preview {
+            background: white;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 30px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .eticket-preview img {
+            max-width: 200px;
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+        .info-grid {
+            grid-template-columns: 1fr !important;
+            gap: 20px;
+        }
+        
+        .action-buttons {
+            grid-template-columns: 1fr !important;
+            position: fixed !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            background: white !important;
+            padding: 15px !important;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1) !important;
+            gap: 10px !important;
+            margin: 0 !important;
+        }
+        
+        .confirmation-card {
+            padding: 20px !important;
+            margin: 0 -15px !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+        }
+        
+        .btn {
+            padding: 18px !important;
+            font-size: 16px !important;
+        }
+        
+        .btn-outline {
+            order: 1;
+        }
+        
+        .btn-primary, .btn-secondary {
+            order: 2;
+        }
+    }
+
+        .qr-code {
+            width: 120px;
+            height: 120px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px auto;
+            font-family: monospace;
+            font-size: 10px;
+            text-align: center;
+            padding: 10px;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="top-bar">
+                <div class="logo-container">
+                    <a href="index.html" class="logo">
+                        <img src="img/verick-logo.png" alt="Verick Bookings" class="logo-image">
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="business-trip.html">Book Business Trip</a></li>
+                </ul>
+                <div class="nav-icons">
+                    <a href="#"><i class="fas fa-user"></i> My Account</a>
+                    <a href="#"><i class="fas fa-shopping-cart"></i> My Bookings</a>
+                    <div class="language-selector">EN | FR | ES</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="confirmation-hero">
+        <div class="container">
+            <h1>Booking Confirmed!</h1>
+            <p>Your flight has been successfully booked</p>
+        </div>
+    </section>
+
+    <section class="confirmation-container">
+        <div class="confirmation-card">
+            <div class="success-header">
+                <div class="success-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h2>Thank You for Choosing Verick!</h2>
+                <p>Your booking has been confirmed and your e-ticket has been generated</p>
+            </div>
+
+            <div class="booking-reference">
+                <h3>Booking Reference</h3>
+                <div class="reference-number" id="booking-reference">VRB-8X7Y-Z9P2</div>
+                <p>Please save this number for all future inquiries</p>
+            </div>
+
+            <div class="info-grid">
+                <div>
+                    <div class="info-section">
+                        <h3><i class="fas fa-plane"></i> Flight Details</h3>
+                        <div class="flight-summary">
+                            <div class="flight-route">
+                                <div>
+                                    <strong id="departure-city">Accra, Ghana (ACC)</strong>
+                                    <div id="departure-date">Fri, Jun 15, 2024 • 08:30</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div id="flight-duration">7h 15m</div>
+                                    <div style="font-size: 12px; color: #666;" id="trip-type">One Way</div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <strong id="arrival-city">London, UK (LHR)</strong>
+                                    <div id="arrival-time">19:45</div>
+                                </div>
+                            </div>
+                            <div class="flight-details">
+                                <span id="airline-info">British Airways • BA 114</span>
+                                <span id="aircraft-info">Boeing 777 • Economy</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <h3><i class="fas fa-credit-card"></i> Payment Information</h3>
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 8px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>Total Paid:</span>
+                                <strong id="total-paid">GHS 2,450</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>Payment Method:</span>
+                                <span id="payment-method">Credit Card •••• 3456</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>Payment Date:</span>
+                                <span id="payment-date">Dec 5, 2024 14:23</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="info-section">
+                        <h3><i class="fas fa-users"></i> Passengers</h3>
+                        <div class="passenger-list" id="passengers-list">
+                            <!-- Passengers will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <h3><i class="fas fa-envelope"></i> Contact Information</h3>
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 8px;">
+                            <div style="margin-bottom: 10px;">
+                                <strong>Email:</strong>
+                                <div id="contact-email">customer@example.com</div>
+                            </div>
+                            <div>
+                                <strong>Phone:</strong>
+                                <div id="contact-phone">+233 55 123 4567</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="eticket-preview">
+                <h4><i class="fas fa-ticket-alt"></i> E-Ticket Generated</h4>
+                <p>Your electronic ticket has been created and sent to your email</p>
+                <div class="qr-code">
+                    VRB-8X7Y-Z9P2<br>
+                    E-TICKET QR
+                </div>
+                <p style="font-size: 12px; color: #666; margin-top: 10px;">
+                    Scan this code at the airport for quick check-in
+                </p>
+            </div>
+
+            <div class="ticket-notice">
+                <i class="fas fa-paper-plane"></i>
+                <h4>Your E-Ticket is on its way!</h4>
+                <p>We've sent your electronic ticket to <strong id="sent-email">customer@example.com</strong>. 
+                   Please check your inbox and spam folder.</p>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="downloadETicket()">
+                    <i class="fas fa-download"></i> Download E-Ticket
+                </button>
+                <button class="btn btn-secondary" onclick="printConfirmation()">
+                    <i class="fas fa-print"></i> Print Confirmation
+                </button>
+                <a href="index.html" class="btn btn-outline">
+                    <i class="fas fa-home"></i> Back to Home
+                </a>
+                <a href="#" class="btn btn-outline">
+                    <i class="fas fa-plus"></i> Book Another Flight
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Verick Bookings</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html">Flight Booking</a></li>
+                        <li><a href="services.html">Hotel Reservations</a></li>
+                        <li><a href="services.html">Car Rentals</a></li>
+                        <li><a href="services.html">Travel Insurance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Business Travel</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Corporate Accounts</a></li>
+                        <li><a href="#">Group Bookings</a></li>
+                        <li><a href="#">Travel Management</a></li>
+                        <li><a href="#">Dedicated Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2024 Verick Bookings. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/confirmation.js"></script>
+</body>
+</html>

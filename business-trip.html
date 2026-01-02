@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Travel Solutions - Verick Bookings</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-64x64.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-64x64.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon-64x64.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .business-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .business-features {
+            padding: 60px 0;
+            background: #f8f9fa;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: #ff6b35;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 28px;
+        }
+
+        .business-form-section {
+            padding: 60px 0;
+        }
+
+        .business-form-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .form-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .form-tab {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .form-tab.active {
+            border-bottom-color: #ff6b35;
+            background: white;
+            color: #ff6b35;
+            font-weight: 600;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 40px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .business-form {
+            display: grid;
+            gap: 25px;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section h3 {
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-section h3 i {
+            color: #ff6b35;
+        }
+
+        .business-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ff6b35;
+        }
+
+        .traveler-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #ff6b35;
+        }
+
+        .traveler-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .add-traveler-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .remove-traveler-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .corporate-benefits {
+            background: linear-gradient(135deg, #2c3e50, #4a6491);
+            color: white;
+            padding: 60px 0;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .benefit-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .benefit-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #ff6b35;
+        }
+
+        .submit-business-btn {
+            background: #ff6b35;
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 30px auto 0;
+        }
+
+        .submit-business-btn:hover {
+            background: #e55a2b;
+        }
+
+        .contact-cta {
+            background: #ff6b35;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .business-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-tabs {
+                flex-direction: column;
+            }
+            
+            .tab-content {
+                padding: 20px;
+            }
+            
+            .business-hero {
+                padding: 50px 0;
+            }
+        }
+
+        .file-upload {
+            border: 2px dashed #e0e0e0;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .file-upload:hover {
+            border-color: #ff6b35;
+        }
+
+        .file-upload i {
+            font-size: 40px;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+
+        .budget-slider {
+            margin-top: 10px;
+        }
+
+        .budget-value {
+            text-align: center;
+            font-weight: 600;
+            color: #ff6b35;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="top-bar">
+                <div class="logo-container">
+                    <a href="index.html" class="logo">
+                        <img src="img/verick-logo.png" alt="Verick Bookings" class="logo-image">
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="business-trip.html" class="active">Book Business Trip</a></li>
+                </ul>
+                <div class="nav-icons">
+                    <div class="user-dropdown">
+                        <button class="user-dropdown-btn">
+                            <i class="fas fa-user"></i> My Account <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown-content">
+                            <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+                            <a href="register.html"><i class="fas fa-user-plus"></i> Create Account</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="dashboard.html" class="dashboard-link" style="display: none;">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                            <a href="#" class="logout-link" style="display: none;">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </a>
+                        </div>
+                    </div>
+                    <a href="#"><i class="fas fa-shopping-cart"></i> My Cart</a>
+                    <div class="language-selector">EN | FR | ES</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="business-hero">
+        <div class="container">
+            <h1>Business Travel Solutions</h1>
+            <p>Streamlined corporate travel management with exclusive benefits and dedicated support</p>
+            <div style="margin-top: 30px;">
+                <a href="#business-form" class="btn" style="background: #ff6b35; color: white; padding: 12px 30px; border-radius: 6px; text-decoration: none;">
+                    Request Corporate Rates
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="business-features">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 20px;">Why Choose Verick for Business Travel?</h2>
+            <p style="text-align: center; color: #666; max-width: 800px; margin: 0 auto 40px;">
+                Comprehensive travel management solutions designed for corporate efficiency and cost savings
+            </p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Cost Savings</h3>
+                    <p>Exclusive corporate rates and negotiated discounts with major airlines and hotels</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Dedicated Support</h3>
+                    <p>24/7 dedicated account manager and travel support for your team</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <h3>Expense Management</h3>
+                    <p>Streamlined expense reporting and integrated accounting solutions</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Traveler Safety</h3>
+                    <p>Comprehensive travel risk management and emergency assistance</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Management</h3>
+                    <p>Real-time booking approvals and travel management on the go</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h3>Analytics & Reporting</h3>
+                    <p>Detailed travel spend analytics and customized reporting</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="business-form" class="business-form-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 10px;">Request Business Travel Services</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 40px;">
+                Fill out the form below and our corporate travel team will contact you within 24 hours
+            </p>
+            
+            <div class="business-form-container">
+                <div class="form-tabs">
+                    <div class="form-tab active" data-tab="quick-inquiry">Quick Inquiry</div>
+                    <div class="form-tab" data-tab="detailed-request">Detailed Request</div>
+                    <div class="form-tab" data-tab="corporate-account">Corporate Account</div>
+                </div>
+                
+                <!-- Quick Inquiry Tab -->
+                <div class="tab-content active" id="quick-inquiry">
+                    <form class="business-form" id="quick-inquiry-form">
+                        <div class="form-section">
+                            <h3><i class="fas fa-building"></i> Company Information</h3>
+                            <div class="business-grid">
+                                <div class="form-group">
+                                    <label for="company-name">Company Name *</label>
+                                    <input type="text" id="company-name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="company-size">Company Size *</label>
+                                    <select id="company-size" required>
+                                        <option value="">Select Size</option>
+                                        <option value="1-10">1-10 employees</option>
+                                        <option value="11-50">11-50 employees</option>
+                                        <option value="51-200">51-200 employees</option>
+                                        <option value="201-500">201-500 employees</option>
+                                        <option value="501+">501+ employees</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="industry">Industry *</label>
+                                    <select id="industry" required>
+                                        <option value="">Select Industry</option>
+                                        <option value="technology">Technology</option>
+                                        <option value="finance">Finance & Banking</option>
+                                        <option value="healthcare">Healthcare</option>
+                                        <option value="manufacturing">Manufacturing</option>
+                                        <option value="consulting">Consulting</option>
+                                        <option value="ngo">NGO/Non-profit</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3><i class="fas fa-user-tie"></i> Contact Person</h3>
+                            <div class="business-grid">
+                                <div class="form-group">
+                                    <label for="contact-name">Full Name *</label>
+                                    <input type="text" id="contact-name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact-position">Position *</label>
+                                    <input type="text" id="contact-position" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact-email">Email *</label>
+                                    <input type="email" id="contact-email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact-phone">Phone *</label>
+                                    <input type="tel" id="contact-phone" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3><i class="fas fa-plane"></i> Travel Needs</h3>
+                            <div class="business-grid">
+                                <div class="form-group">
+                                    <label for="monthly-travelers">Monthly Travelers *</label>
+                                    <select id="monthly-travelers" required>
+                                        <option value="">Select Number</option>
+                                        <option value="1-5">1-5 travelers</option>
+                                        <option value="6-20">6-20 travelers</option>
+                                        <option value="21-50">21-50 travelers</option>
+                                        <option value="51+">51+ travelers</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="common-routes">Common Routes</label>
+                                    <input type="text" id="common-routes" placeholder="e.g., ACC-LHR, ACC-JFK">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="additional-notes">Additional Requirements</label>
+                                <textarea id="additional-notes" rows="3" placeholder="Tell us about your specific travel needs..."></textarea>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="submit-business-btn">
+                            <i class="fas fa-paper-plane"></i> Submit Inquiry
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Detailed Request Tab -->
+                <div class="tab-content" id="detailed-request">
+                    <form class="business-form" id="detailed-request-form">
+                        <!-- Includes all quick inquiry fields plus -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-users"></i> Traveler Information</h3>
+                            <button type="button" class="add-traveler-btn" id="add-traveler">
+                                <i class="fas fa-plus"></i> Add Traveler
+                            </button>
+                            <div id="travelers-container">
+                                <!-- Traveler cards will be added here -->
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3><i class="fas fa-money-bill-wave"></i> Budget & Preferences</h3>
+                            <div class="business-grid">
+                                <div class="form-group">
+                                    <label for="budget-range">Budget Range (GHS)</label>
+                                    <input type="range" id="budget-range" min="1000" max="50000" step="1000" value="10000" class="budget-slider">
+                                    <div class="budget-value" id="budget-value">GHS 10,000</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="preferred-airlines">Preferred Airlines</label>
+                                    <input type="text" id="preferred-airlines" placeholder="e.g., British Airways, Emirates">
+                                </div>
+                                <div class="form-group">
+                                    <label for="travel-policy">Travel Policy Document</label>
+                                    <div class="file-upload" onclick="document.getElementById('policy-file').click()">
+                                        <i class="fas fa-upload"></i>
+                                        <p>Click to upload travel policy (PDF, DOC)</p>
+                                        <input type="file" id="policy-file" accept=".pdf,.doc,.docx" style="display: none;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="submit-business-btn">
+                            <i class="fas fa-paper-plane"></i> Submit Detailed Request
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Corporate Account Tab -->
+                <div class="tab-content" id="corporate-account">
+                    <form class="business-form" id="corporate-account-form">
+                        <div class="form-section">
+                            <h3><i class="fas fa-building"></i> Corporate Account Setup</h3>
+                            <p style="color: #666; margin-bottom: 20px;">
+                                Setup a dedicated corporate account with customized travel management solutions
+                            </p>
+                            <div class="business-grid">
+                                <div class="form-group">
+                                    <label for="corp-company-name">Legal Company Name *</label>
+                                    <input type="text" id="corp-company-name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="corp-registration">Business Registration Number</label>
+                                    <input type="text" id="corp-registration">
+                                </div>
+                                <div class="form-group">
+                                    <label for="corp-address">Business Address *</label>
+                                    <input type="text" id="corp-address" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="corp-website">Company Website</label>
+                                    <input type="url" id="corp-website">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3><i class="fas fa-user-cog"></i> Account Administrators</h3>
+                            <div class="business-grid">
+                                <div class="form-group">
+                                    <label for="admin-1-name">Primary Admin Name *</label>
+                                    <input type="text" id="admin-1-name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="admin-1-email">Primary Admin Email *</label>
+                                    <input type="email" id="admin-1-email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="admin-2-name">Secondary Admin Name</label>
+                                    <input type="text" id="admin-2-name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="admin-2-email">Secondary Admin Email</label>
+                                    <input type="email" id="admin-2-email">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3><i class="fas fa-cog"></i> Service Requirements</h3>
+                            <div class="business-grid">
+                                <div class="form-group">
+                                    <label>Required Services</label>
+                                    <div style="margin-top: 10px;">
+                                        <label style="display: block; margin-bottom: 8px;">
+                                            <input type="checkbox" name="services" value="flight-booking"> Flight Booking
+                                        </label>
+                                        <label style="display: block; margin-bottom: 8px;">
+                                            <input type="checkbox" name="services" value="hotel-booking"> Hotel Reservations
+                                        </label>
+                                        <label style="display: block; margin-bottom: 8px;">
+                                            <input type="checkbox" name="services" value="car-rental"> Car Rental
+                                        </label>
+                                        <label style="display: block; margin-bottom: 8px;">
+                                            <input type="checkbox" name="services" value="travel-insurance"> Travel Insurance
+                                        </label>
+                                        <label style="display: block; margin-bottom: 8px;">
+                                            <input type="checkbox" name="services" value="visa-assistance"> Visa Assistance
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="billing-cycle">Preferred Billing Cycle</label>
+                                    <select id="billing-cycle">
+                                        <option value="monthly">Monthly</option>
+                                        <option value="quarterly">Quarterly</option>
+                                        <option value="annually">Annually</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="submit-business-btn">
+                            <i class="fas fa-user-plus"></i> Request Corporate Account
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="corporate-benefits">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 20px; color: white;">Corporate Benefits</h2>
+            <p style="text-align: center; color: rgba(255,255,255,0.8); margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Exclusive advantages for our corporate partners
+            </p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <h3>Up to 25% Savings</h3>
+                    <p>Special negotiated rates with airlines and hotels</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Spend Analytics</h3>
+                    <p>Detailed reporting and travel spend analysis</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Risk Management</h3>
+                    <p>24/7 traveler tracking and emergency support</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Tools</h3>
+                    <p>Dedicated app for booking and expense management</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-cta">
+        <div class="container">
+            <h2 style="margin-bottom: 15px;">Ready to Streamline Your Business Travel?</h2>
+            <p style="margin-bottom: 25px; font-size: 18px;">
+                Contact our corporate travel specialists today
+            </p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="tel:+233123456789" style="background: white; color: #ff6b35; padding: 12px 25px; border-radius: 6px; text-decoration: none; font-weight: 600;">
+                    <i class="fas fa-phone"></i> +233 123 456 789
+                </a>
+                <a href="mailto:corporate@verickbookings.com" style="background: white; color: #ff6b35; padding: 12px 25px; border-radius: 6px; text-decoration: none; font-weight: 600;">
+                    <i class="fas fa-envelope"></i> corporate@verickbookings.com
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Verick Bookings</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html">Flight Booking</a></li>
+                        <li><a href="services.html">Hotel Reservations</a></li>
+                        <li><a href="services.html">Car Rentals</a></li>
+                        <li><a href="services.html">Travel Insurance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Business Travel</h3>
+                    <ul class="footer-links">
+                        <li><a href="business-trip.html">Corporate Accounts</a></li>
+                        <li><a href="business-trip.html">Group Bookings</a></li>
+                        <li><a href="business-trip.html">Travel Management</a></li>
+                        <li><a href="business-trip.html">Dedicated Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2024 Verick Bookings. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/business-trip.js"></script>
+</body>
+</html>
